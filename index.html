@@ -10,50 +10,76 @@
   <h1>Complexo de Esportes José Maria Paschoalick "Monstrinho"</h1>
     <div class="container">
         <h2>Cadastro de Alunos</h2>
-        <form action="http://localhost:8080/cadastro" method="post">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" name="endereco" required>
-
-            <label for="rg">RG:</label>
-            <input type="text" id="rg" name="rg" required>
-
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" title="O CPF deve estar no formato XXX.XXX.XXX-XX" required>
-
-            <label for="dtNasc">Data de Nascimento:</label>
-            <input type="date" id="dtNasc" name="dtNasc">
-
-            <label for="celular">Celular:</label>
-            <input type="tel" id="celular" name="celular" pattern="\(\d{2}\)\s\d{5}-\d{4}" title="O celular deve estar no formato (XX) XXXXX-XXXX" required>
-
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" pattern="\(\d{2}\)\s\d{4}-\d{4}" title="O telefone deve estar no formato (XX) XXXX-XXXX">
-
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="celResponsavel">Celular do Responsável:</label>
-            <input type="tel" id="celResponsavel" name="celResponsavel" pattern="\(\d{2}\)\s\d{5}-\d{4}" title="O celular do responsável deve estar no formato (XX) XXXXX-XXXX" required>
-
-            <label for="horario">Horário:</label>
-            <input type="time" id="horario" name="horario">
-
-            <label for="genero">Gênero:</label>
-            <select id="genero" name="genero">
-                <option value="MASCULINO">Masculino</option>
-                <option value="FEMININO">Feminino</option>
-                <option value="OUTRO">Outro</option>
-            </select>
-
-            <label for="nomeResponsavel">Nome do Responsável:</label>
-            <input type="text" id="nomeResponsavel" name="nomeResponsavel" required>
-
+        <form id="cadastroForm">
+            <div class="centered-container" id="idField" style="display: none;">
+                <div class="content">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id">
+                    <button type="button" onclick="buscarAlunoPorId()">Buscar</button>
+                </div>
+            </div>
+            
+            <div class="column">
+                <label for="nome">Nome:<span class="required-asterisk">*</span></label>
+                <input type="text" id="nome" name="nome" required>
+                <label for="endereco">Endereço:<span class="required-asterisk">*</span></label>
+                <input type="text" id="endereco" name="endereco" required>
+                <label for="rg">RG:<span class="required-asterisk">*</span></label>
+                <input type="text" id="rg" name="rg" required>
+                <label for="cpf">CPF:<span class="required-asterisk">*</span></label>
+                <input type="text" id="cpf" name="cpf" required>
+                <label for="dtNasc">Data de Nascimento:<span class="required-asterisk">*</span></label>
+                <input type="date" id="dtNasc" name="dtNasc" required>
+                
+                <label for="celular">Celular:<span class="required-asterisk">*</span></label>
+                <input type="tel" id="celular" name="celular" required>
+                <label for="telefone">Telefone:<span class="required-asterisk">*</span></label>
+                <input type="tel" id="telefone" name="telefone">
+                <label for="email">E-mail:<span class="required-asterisk">*</span></label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="column2">
+                <label for="horario">Horário:<span class="required-asterisk">*</span></label>
+                <input type="time" id="horario" name="horario" step="1" required>
+                <label for="genero">Gênero:<span class="required-asterisk">*</span></label>
+                <select id="genero" name="genero" required>
+                    <option value="MASCULINO">Masculino</option>
+                    <option value="FEMININO">Feminino</option>
+                    <option value="OUTRO">Outro</option>
+                </select>
+                <label for="esportes">Esportes:<span class="required-asterisk">*</span></label>
+                <select id="esportes" name="esportes" required>
+                    <option value="TENISDEMESA">Tênis de Mesa</option>
+                    <option value="JUDO">Judô</option>
+                    <option value="BASQUETE">Basquete</option>
+                    <option value="NATACAO">Natação</option>
+                </select>
+                <label for="modalidade">Modalidades:<span class="required-asterisk">*</span></label>
+                <select id="modalidade" name="modalidade" required>
+                    <option value="INFANTIL">Infantil</option>
+                    <option value="JUVENIL">Juvenil</option>
+                    <option value="ADULTO">Adulto</option>
+                </select>
+                <label for="periodo">Períodos:<span class="required-asterisk">*</span></label>
+                <select id="periodo" name="periodo" required>
+                    <option value="MANHA">Manhã</option>
+                    <option value="TARDE">Tarde</option>
+                    <option value="NOITE">Noite</option>
+                </select>
+                <label for="nomeResponsavel">Nome do Responsável:</label>
+                <input type="text" id="nomeResponsavel" name="nomeResponsavel">
+                <label for="celResponsavel">Celular do Responsável:</label>
+                <input type="tel" id="celResponsavel" name="celResponsavel">
+            </div>
+            
             <button type="submit">Enviar</button>
-            <script src="index.js"></script>
+            <button type="button" onclick="mostrarCampoId()">Mostrar Campo ID</button>
+            <button type="button" onclick="atualizarAluno()">Atualizar</button>
+            <button type="button" onclick="deletarAluno()">Deletar</button>
+            <button type="button" onclick="limparFormulario()">Limpar</button>
         </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
