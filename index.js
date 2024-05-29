@@ -104,6 +104,7 @@ function deletarAluno() {
 function mostrarCampoId() {
     const idField = document.getElementById('idField');
     idField.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function preencherFormulario(aluno) {
