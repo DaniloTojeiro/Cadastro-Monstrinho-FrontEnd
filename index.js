@@ -69,7 +69,7 @@ function atualizarAluno() {
         nomeResponsavel: document.getElementById('nomeResponsavel').value
     };
 
-    axios.put(`http://localhost:8080/cadastros/update/${id}`, aluno)
+    axios.patch(`http://localhost:8080/cadastros/update/${id}`, aluno)
         .then(function(response) {
             if (response.status === 200) {
                 alert('Atualização realizada com sucesso!');
