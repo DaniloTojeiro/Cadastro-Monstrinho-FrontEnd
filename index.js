@@ -1,3 +1,102 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const telefoneInput = document.getElementById('telefone');
+    const celularInput = document.getElementById('celular');
+    const celResponsavelInput = document.getElementById('celResponsavel');
+    const rgInput = document.getElementById('rg');
+    const cpfInput = document.getElementById('cpf');
+
+    function formatarTelefone(event) {
+        let input = event.target.value;
+
+        // Remove todos os caracteres que não são dígitos
+        input = input.replace(/\D/g, '');
+
+        if (event.target.id === 'celular' || event.target.id === 'celResponsavel') {
+            // Formatação para celular: (XX) XXXXX-XXXX
+            if (input.length > 0) {
+                input = '(' + input;
+            }
+            if (input.length > 3) {
+                input = input.slice(0, 3) + ') ' + input.slice(3);
+            }
+            if (input.length > 10) {
+                input = input.slice(0, 10) + '-' + input.slice(10);
+            }
+            if (input.length > 15) {
+                input = input.slice(0, 15);
+            }
+        } else {
+            // Formatação para telefone: (XX) XXXX-XXXX
+            if (input.length > 0) {
+                input = '(' + input;
+            }
+            if (input.length > 3) {
+                input = input.slice(0, 3) + ') ' + input.slice(3);
+            }
+            if (input.length > 9) {
+                input = input.slice(0, 9) + '-' + input.slice(9);
+            }
+            if (input.length > 14) {
+                input = input.slice(0, 14);
+            }
+        }
+
+        event.target.value = input;
+    }
+
+    function formatarRg(event) {
+        let input = event.target.value;
+
+        // Remove todos os caracteres que não são dígitos
+        input = input.replace(/\D/g, '');
+
+        // Formatação para RG: XX.XXX.XXX-X
+        if (input.length > 2) {
+            input = input.slice(0, 2) + '.' + input.slice(2);
+        }
+        if (input.length > 6) {
+            input = input.slice(0, 6) + '.' + input.slice(6);
+        }
+        if (input.length > 10) {
+            input = input.slice(0, 10) + '-' + input.slice(10);
+        }
+        if (input.length > 12) {
+            input = input.slice(0, 12);
+        }
+
+        event.target.value = input;
+    }
+
+    function formatarCpf(event) {
+        let input = event.target.value;
+
+        // Remove todos os caracteres que não são dígitos
+        input = input.replace(/\D/g, '');
+
+        // Formatação para CPF: XXX.XXX.XXX-XX
+        if (input.length > 3) {
+            input = input.slice(0, 3) + '.' + input.slice(3);
+        }
+        if (input.length > 7) {
+            input = input.slice(0, 7) + '.' + input.slice(7);
+        }
+        if (input.length > 11) {
+            input = input.slice(0, 11) + '-' + input.slice(11);
+        }
+        if (input.length > 14) {
+            input = input.slice(0, 14);
+        }
+
+        event.target.value = input;
+    }
+
+    telefoneInput.addEventListener('input', formatarTelefone);
+    celularInput.addEventListener('input', formatarTelefone);
+    celResponsavelInput.addEventListener('input', formatarTelefone);
+    rgInput.addEventListener('input', formatarRg);
+    cpfInput.addEventListener('input', formatarCpf);
+});
+
 document.getElementById('cadastroForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
 
@@ -94,11 +193,32 @@ function deletarAluno() {
     axios.delete(`http://localhost:8080/cadastros/delete/${id}`)
         .then(function(response) {
             alert('Aluno deletado com sucesso!');
+            limparFormulario(); // Chama a função para limpar os campos
         })
         .catch(function(error) {
             console.error('Houve um erro ao deletar o aluno:', error);
             alert('Erro ao deletar o aluno');
         });
+}
+
+function limparFormulario() {
+    mostrarCampoId();
+    document.getElementById('id').value = '';
+    document.getElementById('nome').value = '';
+    document.getElementById('endereco').value = '';
+    document.getElementById('rg').value = '';
+    document.getElementById('cpf').value = '';
+    document.getElementById('dtNasc').value = '';
+    document.getElementById('celular').value = '';
+    document.getElementById('telefone').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('celResponsavel').value = '';
+    document.getElementById('horario').value = '';
+    document.getElementById('genero').value = '';
+    document.getElementById('esportes').value = '';
+    document.getElementById('modalidade').value = '';
+    document.getElementById('periodo').value = '';
+    document.getElementById('nomeResponsavel').value = '';
 }
 
 function mostrarCampoId() {
