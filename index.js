@@ -1,18 +1,45 @@
 document.addEventListener('DOMContentLoaded', function() {
     const telefoneInput = document.getElementById('telefone');
     const celularInput = document.getElementById('celular');
-    const celResponsavelInput = document.getElementById('celResponsavel');
     const rgInput = document.getElementById('rg');
     const cpfInput = document.getElementById('cpf');
+    const dtNascInput = document.getElementById('dtNasc');
+    const nomeResponsavelInput = document.getElementById('nomeResponsavel');
+    const celResponsavelInput = document.getElementById('celResponsavel');
+    const nomeResponsavelAsterisk = document.getElementById('nomeResponsavelAsterisk');
+    const celResponsavelAsterisk = document.getElementById('celResponsavelAsterisk');
+    
+        function checkAge() {
+            const dtNasc = new Date(dtNascInput.value);
+            const today = new Date();
+            const age = today.getFullYear() - dtNasc.getFullYear();
+            const m = today.getMonth() - dtNasc.getMonth();
+            
+            if (m < 0 || (m === 0 && today.getDate() < dtNasc.getDate())) {
+                age--;
+            }
+    
+            if (age <= 18) {
+                nomeResponsavelInput.setAttribute('required', 'required');
+                celResponsavelInput.setAttribute('required', 'required');
+                nomeResponsavelAsterisk.textContent = '*';
+                celResponsavelAsterisk.textContent = '*';
+            } else {
+                nomeResponsavelInput.removeAttribute('required');
+                celResponsavelInput.removeAttribute('required');
+                nomeResponsavelAsterisk.textContent = '';
+                celResponsavelAsterisk.textContent = '';
+            }
+        }
+    
+        dtNascInput.addEventListener('change', checkAge);
 
     function formatarTelefone(event) {
         let input = event.target.value;
 
-        // Remove todos os caracteres que não são dígitos
         input = input.replace(/\D/g, '');
 
         if (event.target.id === 'celular' || event.target.id === 'celResponsavel') {
-            // Formatação para celular: (XX) XXXXX-XXXX
             if (input.length > 0) {
                 input = '(' + input;
             }
@@ -26,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 input = input.slice(0, 15);
             }
         } else {
-            // Formatação para telefone: (XX) XXXX-XXXX
             if (input.length > 0) {
                 input = '(' + input;
             }
@@ -47,10 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatarRg(event) {
         let input = event.target.value;
 
-        // Remove todos os caracteres que não são dígitos
         input = input.replace(/\D/g, '');
 
-        // Formatação para RG: XX.XXX.XXX-X
         if (input.length > 2) {
             input = input.slice(0, 2) + '.' + input.slice(2);
         }
@@ -70,10 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function formatarCpf(event) {
         let input = event.target.value;
 
-        // Remove todos os caracteres que não são dígitos
         input = input.replace(/\D/g, '');
 
-        // Formatação para CPF: XXX.XXX.XXX-XX
         if (input.length > 3) {
             input = input.slice(0, 3) + '.' + input.slice(3);
         }
@@ -193,7 +215,7 @@ function deletarAluno() {
     axios.delete(`http://localhost:8080/cadastros/delete/${id}`)
         .then(function(response) {
             alert('Aluno deletado com sucesso!');
-            limparFormulario(); // Chama a função para limpar os campos
+            limparFormulario(); 
         })
         .catch(function(error) {
             console.error('Houve um erro ao deletar o aluno:', error);

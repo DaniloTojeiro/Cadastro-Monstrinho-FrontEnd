@@ -8,6 +8,10 @@ body {
 h1{
   color: #fff;
 }
+p{
+  color: #0056b3;
+  margin: 0;
+}
 
 .content-center{
   padding: 0 20px;
@@ -32,11 +36,11 @@ h1{
 }
 
 .column {
-  grid-column: 1; /* Todos os elementos da coluna 1 */
+  grid-column: 1; 
 }
 
 .column2 {
-  grid-column: 2; /* Todos os elementos da coluna 2 */
+  grid-column: 2; 
 }
 h1{
   text-align: center;
@@ -86,4 +90,25 @@ button:hover {
 
 .required-asterisk {
   color: red;
+}
+
+.container-landin  {
+  text-align: center;
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffffffe7;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: block;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  font-size: bold;
+}
+.container-landin img{
+  border-radius: 8px;
+  width: 1000px;
+}
+.container-landin h1{
+  color: #0056b3;
 }
