@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const celResponsavelInput = document.getElementById('celResponsavel');
     const nomeResponsavelAsterisk = document.getElementById('nomeResponsavelAsterisk');
     const celResponsavelAsterisk = document.getElementById('celResponsavelAsterisk');
+    const marx = 2;
     
         function checkAge() {
             const dtNasc = new Date(dtNascInput.value);
