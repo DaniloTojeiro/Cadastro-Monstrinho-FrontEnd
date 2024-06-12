@@ -10,28 +10,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const celResponsavelAsterisk = document.getElementById('celResponsavelAsterisk');
     const marx = 2;
     
-        function checkAge() {
-            const dtNasc = new Date(dtNascInput.value);
-            const today = new Date();
-            const age = today.getFullYear() - dtNasc.getFullYear();
-            const m = today.getMonth() - dtNasc.getMonth();
-            
-            if (m < 0 || (m === 0 && today.getDate() < dtNasc.getDate())) {
-                age--;
-            }
-    
-            if (age <= 18) {
-                nomeResponsavelInput.setAttribute('required', 'required');
-                celResponsavelInput.setAttribute('required', 'required');
-                nomeResponsavelAsterisk.textContent = '*';
-                celResponsavelAsterisk.textContent = '*';
-            } else {
-                nomeResponsavelInput.removeAttribute('required');
-                celResponsavelInput.removeAttribute('required');
-                nomeResponsavelAsterisk.textContent = '';
-                celResponsavelAsterisk.textContent = '';
-            }
-        }
+    function checkAge() {
+      const dtNasc = new Date(dtNascInput.value);
+      const today = new Date();
+      let age = today.getFullYear() - dtNasc.getFullYear();
+      const m = today.getMonth() - dtNasc.getMonth();
+  
+      if (m < 0 || (m === 0 && today.getDate() < dtNasc.getDate())) {
+          age--;
+      }
+  
+      if (age < 18) {
+          nomeResponsavelInput.setAttribute('required', 'required');
+          celResponsavelInput.setAttribute('required', 'required');
+          nomeResponsavelAsterisk.textContent = '*';
+          celResponsavelAsterisk.textContent = '*';
+      } else {
+          nomeResponsavelInput.removeAttribute('required');
+          celResponsavelInput.removeAttribute('required');
+          nomeResponsavelAsterisk.textContent = '';
+          celResponsavelAsterisk.textContent = '';
+      }
+  }
+  
     
         dtNascInput.addEventListener('change', checkAge);
 
